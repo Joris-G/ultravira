@@ -1,18 +1,26 @@
 :root {
   --color-primary: rgb(255, 176, 80);
   --menu-padding: 3rem;
-  --logo-height: 25vh;
-  --nav-height:calc(var(--menu-padding) + var(--logo-height));
+  --logo-height: 30vh;
+  --nav-height:calc(var(--menu-padding) + 6rem);
 }
 
+@font-face {
+  font-family: "LivicExtraLight";
+  src: url("src/font/Livvic-ExtraLight.ttf");
+}
+@font-face {
+  font-family: "PP";
+  src: url("src/font/PP Right Didone - Compact Regular.otf");
+}
+@font-face {
+  font-family: "PP Compact Dark";
+  src: url("src/font/PP Right Didone - Compact Dark.otf");
+}
 * {
-  font-size: 20px;
+  font-size: 10px;
   margin: 0;
   padding: 0;
-}
-
-body {
-  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande", "Lucida Sans", Arial, sans-serif;
 }
 
 .background {
@@ -25,26 +33,39 @@ body {
   z-index: 999;
   position: fixed;
   width: 100%;
-  box-shadow: 0 50px 50px rgba(255, 255, 255, 0.5);
+  box-shadow: 0 0 500px 50px rgba(255, 255, 255, 0.5);
 }
 
 .header-container {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
 }
 .header-container__logo {
+  background-color: white;
+  position: fixed;
+  z-index: 998;
+  left: 0;
   height: var(--logo-height);
   aspect-ratio: 1;
   animation: logo 1s ease-in;
+  transition: transform 0.5s ease-in-out;
+  transform: scale(calc(1 - var(--scroll-pos, 0) * 0.5 / (100vh - 300px)));
+  padding: var(--menu-padding);
+  padding-bottom: 0;
 }
 .header-container__navigation {
   display: flex;
   justify-content: space-between;
-  padding: 3rem;
+  padding: var(--menu-padding);
+  padding-bottom: 0;
 }
 .header-container__navigation__menu {
   display: flex;
   gap: 4rem;
+}
+.header-container__navigation__menu__menu-item {
+  font-family: "PP Compact Dark";
+  font-size: 32px;
 }
 .header-container__navigation__menu__menu-item:nth-of-type(1) {
   animation: menuItems ease-in 0.5s;
@@ -96,12 +117,19 @@ body {
 .summary-container ul li:nth-of-type(5) {
   animation: summary-item-lh ease-in-out 1s 1.5s forwards;
 }
-.summary-container h1 {
+.summary-container__title {
+  font-family: "PP Compact Dark";
   text-transform: capitalize;
+  font-size: 32px;
   color: var(--color-primary);
+}
+.summary-container__description {
+  font-size: 15px;
+  font-family: "LivicExtraLight";
 }
 .summary li {
   list-style: none;
+  margin-bottom: 1rem;
 }
 .summary a {
   text-decoration: none;
@@ -112,6 +140,7 @@ body {
 }
 
 .section {
+  height: calc(90vh - var(--nav-height));
   margin: 5rem;
   border: solid 0.2rem red;
   /* position: relative; */
